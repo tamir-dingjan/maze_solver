@@ -4,22 +4,23 @@ from tkinter import Tk, BOTH, Canvas
 class Window(Tk):
     def __init__(self, width: int, height: int):
         super().__init__()
-        self.root = Tk()
-        self.root.title("Maze Solver")
-        self.root.geometry(f"{width}x{height}")
+        self.title("Maze Solver")
+        self.geometry(f"{width}x{height}")
 
-        self.canvas = Canvas(master=self.root, bg="white")
+        # Create a canvas to draw on
+        self.canvas = Canvas(master=self, bg="white")
         self.canvas.pack()
 
         self.running = False
 
-        self.root.protocol("WM_DELETE_WINDOW", self.close())
+        self.protocol("WM_DELETE_WINDOW", self.close())
 
-        self.root.mainloop()
+    def run(self):
+        self.mainloop()
 
     def redraw(self):
-        self.root.update_idletasks()
-        self.root.update()
+        self.update_idletasks()
+        self.update()
 
     def wait_for_close(self):
         self.running = True
@@ -30,6 +31,6 @@ class Window(Tk):
         self.running = False
 
 
-# Create the main window
-win = Window(800, 600)
-win.wait_for_close()
+if __name__ == "__main__":
+    win = Window(800, 600)
+    win.run()
