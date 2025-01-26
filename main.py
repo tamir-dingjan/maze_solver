@@ -34,6 +34,63 @@ class Line:
         )
 
 
+class Cell:
+    """
+    Each box in the maze grid is a "Cell", which tracks if it has a wall
+    on each of the four sides.
+
+    The _x1, _x2, _y1, and _y2 attributes store the cell location on the
+    canvas:
+     - _x1 = left bound
+     - _x2 = right bound
+     - _y1 = top bound
+     - _y2 = bottom bound
+
+    The _win attribute gives access to the window so that the
+    cell can draw itself.
+    """
+
+    def __init__(
+        self,
+        has_left_wall: bool,
+        has_right_wall: bool,
+        has_top_wall: bool,
+        has_bottom_wall: bool,
+        _x1: int,
+        _x2: int,
+        _y1: int,
+        _y2: int,
+        _win,
+    ):
+        self.has_left_wall = has_left_wall
+        self.has_right_wall = has_right_wall
+        self.has_top_wall = has_top_wall
+        self.has_bottom_wall = has_bottom_wall
+        self._x1 = _x1
+        self._x2 = _x2
+        self._y1 = _y1
+        self._y2 = _y2
+        self._win = _win
+
+    def draw(self):
+        if self.has_left_wall:
+            self._win.draw_line(
+                Line(Point(self._x1, self._y1), Point(self._x1, self._y2)), fill="black"
+            )
+        if self.has_right_wall:
+            self._win.draw_line(
+                Line(Point(self._x2, self._y1), Point(self._x2, self._y2)), fill="black"
+            )
+        if self.has_top_wall:
+            self._win.draw_line(
+                Line(Point(self._x1, self._y1), Point(self._x2, self._y1)), fill="black"
+            )
+        if self.has_bottom_wall:
+            self._win.draw_line(
+                Line(Point(self._x1, self._y2), Point(self._x2, self._y2)), fill="black"
+            )
+
+
 class Window(Tk):
     def __init__(self, width: int, height: int):
         super().__init__()
