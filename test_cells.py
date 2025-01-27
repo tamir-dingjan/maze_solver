@@ -9,6 +9,8 @@ win = Window(800, 600)
 x_pos = 10
 y_pos = 10
 
+cells = []
+
 for left in [True, False]:
     for right in [True, False]:
         for top in [True, False]:
@@ -21,8 +23,14 @@ for left in [True, False]:
                 # Row wrapping
                 if x_pos > 160:
                     x_pos = 10
-                    y_pos += 20
-                cell.draw()
+                    y_pos += 60
+                cells.append(cell)
+
+undo = False
+for cell_i, cell in enumerate(cells):
+    cell.draw()
+    cell.draw_move(cells[cell_i - 1], undo=undo)
+    undo = not undo
 
 # Run the window
 win.run()

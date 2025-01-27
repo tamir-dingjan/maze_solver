@@ -72,6 +72,19 @@ class Cell:
         self._y2 = _y2
         self._win = _win
 
+    def __repr__(self):
+        _walls = []
+        if self.has_left_wall:
+            _walls.append("left")
+        if self.has_right_wall:
+            _walls.append("right")
+        if self.has_top_wall:
+            _walls.append("top")
+        if self.has_bottom_wall:
+            _walls.append("bottom")
+        _walls = ", ".join(_walls)
+        return f"Cell(walls:{_walls}, coords: x1={self._x1}, x2={self._x2}, y1={self._y1}, y2={self._y2})"
+
     def draw(self):
         if self.has_left_wall:
             self._win.draw_line(
@@ -93,6 +106,23 @@ class Cell:
                 Line(Point(self._x1, self._y2), Point(self._x2, self._y2)),
                 fill_colour="black",
             )
+
+    def draw_move(self, to_cell, undo=False):
+        if undo:
+            colour = "red"
+        else:
+            colour = "gray"
+
+        # The line begins in the center of this cell, and ends at the center of the target cell.
+        start_x = ((self._x2 - self._x1) / 2) + self._x1
+        start_y = ((self._y2 - self._y1) / 2) + self._y1
+        end_x = ((to_cell._x2 - to_cell._x1) / 2) + to_cell._x1
+        end_y = ((to_cell._y2 - to_cell._y1) / 2) + to_cell._y1
+        # Draw the line between the two cells.
+        self._win.draw_line(
+            Line(Point(start_x, start_y), Point(end_x, end_y)),
+            fill_colour=colour,
+        )
 
 
 class Window(Tk):
