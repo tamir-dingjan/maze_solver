@@ -44,3 +44,12 @@ class Maze:
     def _animate(self):
         self._win.redraw()
         sleep(0.01)
+
+    def _break_entrance_and_exit(self):
+        # Entrance is always the top wall of the top-left cell
+        self._cells[0][0].has_top_wall = False
+        self._draw_cell(0, 0)
+
+        # Exit is always at the bottom of the bottom-right cell
+        self._cells[self._num_cols - 1][self._num_rows - 1].has_bottom_wall = False
+        self._draw_cell(self._num_cols - 1, self._num_rows - 1)

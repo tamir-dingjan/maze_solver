@@ -13,5 +13,6 @@ for col in range(n_cols):
     for row in range(n_rows):
         maze._draw_cell(col, row)
 
+maze._break_entrance_and_exit()
 
 win.run()

@@ -1,5 +1,4 @@
 from tkinter import Tk, BOTH, Canvas
-from time import sleep
 from point import Point
 from line import Line
 from cell import Cell

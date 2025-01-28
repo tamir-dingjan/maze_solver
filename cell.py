@@ -54,25 +54,30 @@ class Cell:
         return f"Cell(walls:{_walls}, coords: x1={self._x1}, x2={self._x2}, y1={self._y1}, y2={self._y2})"
 
     def draw(self):
-        if self.has_left_wall:
-            self._win.draw_line(
+
+        for _wall, _line in zip(
+            [
+                self.has_left_wall,
+                self.has_right_wall,
+                self.has_top_wall,
+                self.has_bottom_wall,
+            ],
+            [
                 Line(Point(self._x1, self._y1), Point(self._x1, self._y2)),
-                fill_colour="black",
-            )
-        if self.has_right_wall:
-            self._win.draw_line(
                 Line(Point(self._x2, self._y1), Point(self._x2, self._y2)),
-                fill_colour="black",
-            )
-        if self.has_top_wall:
-            self._win.draw_line(
                 Line(Point(self._x1, self._y1), Point(self._x2, self._y1)),
-                fill_colour="black",
-            )
-        if self.has_bottom_wall:
-            self._win.draw_line(
                 Line(Point(self._x1, self._y2), Point(self._x2, self._y2)),
-                fill_colour="black",
+            ],
+        ):
+
+            if _wall:
+                fill_colour = "black"
+            else:
+                fill_colour = "white"
+
+            self._win.draw_line(
+                _line,
+                fill_colour=fill_colour,
             )
 
     def draw_move(self, to_cell, undo=False):
