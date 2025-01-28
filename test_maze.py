@@ -15,4 +15,6 @@ for col in range(n_cols):
 
 maze._break_entrance_and_exit()
 
+maze._break_walls_r(0, 0)
+
 win.run()

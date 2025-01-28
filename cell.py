@@ -29,6 +29,7 @@ class Cell:
         _y1: int,
         _y2: int,
         _win=None,
+        visited=False,
     ):
         self.has_left_wall = has_left_wall
         self.has_right_wall = has_right_wall
@@ -39,6 +40,7 @@ class Cell:
         self._y1 = _y1
         self._y2 = _y2
         self._win = _win
+        self.visited = visited
 
     def __repr__(self):
         _walls = []
