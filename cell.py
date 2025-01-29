@@ -84,9 +84,9 @@ class Cell:
 
     def draw_move(self, to_cell, undo=False):
         if undo:
-            colour = "red"
-        else:
             colour = "gray"
+        else:
+            colour = "red"
 
         # The line begins in the center of this cell, and ends at the center of the target cell.
         start_x = ((self._x2 - self._x1) / 2) + self._x1

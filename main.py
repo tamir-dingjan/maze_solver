@@ -12,7 +12,7 @@ class Window(Tk):
         self.geometry(f"{width}x{height}")
 
         # Create a canvas to draw on
-        self.canvas = Canvas(master=self, bg="white")
+        self.canvas = Canvas(master=self, width=width, height=height, bg="white")
         self.canvas.pack()
 
         self.running = False
